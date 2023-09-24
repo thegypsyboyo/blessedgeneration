@@ -8,8 +8,10 @@ import "../main.scss"
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import NavMenu from '@/components/Home/NavMenu'
+import { NavbarSocials } from '@/typings'
+import Home from '@/components/Home/navFetch'
 config.autoAddCss = false;
-
 
 // const caveat = Caveat({ 
 //   subsets: ['cyrillic'],
@@ -20,19 +22,19 @@ config.autoAddCss = false;
 const nunito = Nunito({ 
   subsets: ['latin'],
   variable: '--font-nun',
-  display: 'swap',
-  adjustFontFallback: false
+  // display: 'swap',
+  // adjustFontFallback: false
 })
 const manrope = Manrope({ 
   subsets: ['latin'],
   variable: '--font-man',
-  display: 'swap',
-  adjustFontFallback: false
+  // display: 'swap',
+  // adjustFontFallback: false
 })
 const caveat = Caveat({ 
-  subsets: ['latin'], 
-  display: 'swap', 
-  adjustFontFallback: false,
+  subsets: ['cyrillic'], 
+  // display: 'swap', 
+  // adjustFontFallback: false,
   variable: "--font-cav"
 })
 
@@ -45,12 +47,15 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
+  navquery: NavbarSocials[] 
 }) {
   return (
     <html lang="en">
       <body className={`${caveat.variable}  ${manrope.variable}  ${nunito.variable} font-nun`}>
       {/* <body className={caveat.variable}> */}
-        <Navbar/>
+        {/* <Navbar/> */}
+        <Home/>
+        {/* <NavMenu  navquery={navquery}/> */}
           {children}
         <Footer/>
       </body>

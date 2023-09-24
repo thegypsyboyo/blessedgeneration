@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a,
+a:hover,
+a:focus,
+a:visited {
+  text-decoration: none;
+}
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+button:focus,
+button:hover,
+button:visited {
+  border: none;
+
+  cursor: pointer;
+}
+
+:focus {
+  outline: none;
+}
+
+
+@layer utilities {
+    .bg-custom-gradient {
+      background: linear-gradient(180deg, rgba(33, 45, 43, 0.008841036414565795) 17%, rgba(33, 45, 43, 1) 97%);
+    }
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CSS for Slide Animations */
+.slide {
+  transition: all 0.5s ease;
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.slide h1,
+.slide p,
+.slide button {
+  transition: all 0.5s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.slide img {
+  transition: all 0.5s ease;
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+/* Apply animations when the slide is active */
+.swiper-slide-active .slide {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.swiper-slide-active .slide h1,
+.swiper-slide-active .slide p,
+.swiper-slide-active .slide button {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.swiper-slide-active .slide img {
+  transform: translateX(0);
+  opacity: 1;
+}

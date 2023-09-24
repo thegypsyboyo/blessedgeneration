@@ -1,0 +1,151 @@
+"use client"
+
+import React, {useState} from 'react'
+import Layout from '@/components/Home/Layout'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import {BsArrowLeft, BsArrowRight, BsChatDots, BsChatFill, BsFacebook, BsInstagram, BsPhone, BsPhoneFill, BsTwitter, BsYoutube} from "react-icons/bs"
+
+import { TeamDetailsProps, TeamMember } from '../../typings'
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitch, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelopeOpen, faMailForward, faMapMarkedAlt, faPhone, faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
+import urlFor from '@/lib/urlFor'
+
+
+type Props = {
+    memberdata: TeamMember
+}
+
+const TeamDetails = ({memberdata}:Props) => {
+    console.log("Memeber Data: ",memberdata)    
+  return (
+    <section className='w-full h-full block py-[120px] pt-[120px] relative'>
+        <Layout>
+            {memberdata.teamDetails.map((item, index) => (
+            <div className="flex flex-wrap w-full h-full" key={index}>
+                <div className="flex-grow-0 flex-shrink-0 md:max-w-[41.6666%] w-full h-full">
+                    <div className="rounded-[10px] mb-0 w-full max-w-[520px] overflow-hidden relative mx-auto flex flex-col  items-center justify-center">
+                        <Image src={urlFor(memberdata.image).url()}
+                        width={800} height={800} alt='profile-pic' className='w-full h-full md:max-h-[500px] object-cover'/>
+                        <div className="mt-[-45px] mb-[60px] inline-block relative bg-redDark p-[30px] text-white rounded-[10px] w-[80%]">
+                            <ul className="w-full h-full">
+                                <li className="border-b border-b-yellowColor  pb-[10px] mb-[10px]">
+                                    <div className="flex gap-0">
+                                        <div className='text-[18px] text-yellowColor min-w-[40px]'>
+                                            <FontAwesomeIcon icon={faEnvelopeOpen} className=''/>
+                                        </div>
+                                        <p className='font-bold text-white uppercase text-[18px] leading-[26px]'>Tel: <a href={`tel:${item.phone}`} className="w-full h-full">{item.phone}</a></p>
+                                    </div>
+                                </li>
+                                <li className="border-b border-b-yellowColor  pb-[10px] mb-[10px] h-full">
+                                    <div className="flex gap-0">
+                                        <div className='text-[18px] text-yellowColor min-w-[40px]'>
+                                            <FontAwesomeIcon icon={faPhone} className=''/>
+                                        </div>
+                                        <p className='font-bold text-white uppercase text-[18px] leading-[26px]'>Email: <a href={`mailto:${item.email}`} className="w-[90%] h-full">{item.email}</a></p>
+                                    </div>
+                                </li>
+                                <li className="border-b border-b-yellowColor  pb-[10px] mb-[10px] h-full">
+                                    <div className="flex gap-0">
+                                        <div className='text-[18px] text-yellowColor min-w-[40px]'>
+                                            <FontAwesomeIcon icon={faMapMarkedAlt} className=''/>
+                                        </div>
+                                        <p className='font-bold text-white uppercase text-[18px] leading-[26px]'>Add: <a href={`mailto:${item.email}`} className="w-[90%] h-full">{item.location}</a></p>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex-grow-0 flex-shrink-0 md:max-w-[58.33333%] w-full h-full">
+                    <div className="md:pl-[70px] md:pr-[45px] mb-[60px] w-full h-full">
+                        <span className="text-[16px] font-bold text-yellowColor uppercase">{memberdata.position}</span>
+                        <h4 className="text-[30px] lg:text-[52px] font-bold mb-[20px] text-redDark uppercase">{memberdata.name}</h4>
+                        <p className="mb-[20px] text-[16px] text-primaryText">{item.bio}</p>
+                        <div className="flex items-center gap-[20px] mt-[40px] mb-[40px]">
+                            <h4 className="text-[20px] font-bold uppercase">follow me on</h4>
+                            <div className="">
+                            <ul className="w-full transition-all duration-500 h-full transform translate-y-[0px] flex justify-center group-hover:translate-y-[0px] gap-[4px]">
+                                      {memberdata.socials?.map((social, index) => (       
+                                        <li key={index} className=" w-[40px] h-[40px] flex ">
+                                          <Link href={social.url} rel="noreferrer noopener" target="_blank" className={`${social.platform === "facebook" ? "hover:bg-blue-800 bg-blue-800":""} ${social.platform === "instagram" ? "hover:bg-[#F56040] bg-[#F56040]":""}  ${social.platform === "linkedin" ? "hover:bg-blue-400 bg-blue-400":""} ${social.platform === "twitter" ? "hover:bg-blue-600 bg-blue-600":""}  ${social.platform === "youtube" ? "hover:bg-[#c4302b] bg-[#c4302b]":""} ${social.platform === "twitch" ? "hover:bg-[#6441A4] bg-[#6441A4]":""}  text-white cursor-pointer w-full h-full flex items-center justify-center z-[99999]`}>
+                                              {social.platform === "facebook" && <FaFacebookF className=""/>}
+                                              {social.platform === "instagram" && <FaInstagram/>}
+                                              {social.platform === "linkedin" && <FaLinkedinIn/>}
+                                              {social.platform === "twitter" && <FaTwitter/>}
+                                              {social.platform === "twitch" && <FaTwitch/>}
+                                              {social.platform === "youtube" && <FaYoutube/>}
+                                          </Link>
+                                          </li>
+                                      ))}
+                                    </ul>
+                            </div>
+                        </div>
+                        <div className="mt-[35px] ">
+                            <h4 className="mb-[10px]text-[20px] font-[700] uppercase">skillset</h4>
+                            <p className="text-[16px] font-normal text-primaryText leading-[26px] mb-[20px]  mt-[20px]">{item.skillSetInfo}</p>
+                            <div className="flex flex-wrap gap-[45px] pb-[15px] overflow-hidden w-full">
+                                {item.skills?.map((skill, index) => (
+                                <div className="w-[calc((100%-45px)/2)] overflow-x-clip mt-[5px] mb-[0px]" key={index}>
+                                    <div className="mb-[16px]flex justify-between items-center relative w-full">
+                                        <h5 className="text-[14px] inline-block mb-0 font-bold uppercase ">{skill.title}</h5>
+                                        <span className='absolute top-0 right-0 text-[14px]font-bold text-darkRed leading-[26px]'>{skill.percentage}</span>
+                                    </div>
+                                    <div className="h-[6px] rounded-[10px] bg-[#f8f5f0] flex mt-[10px]">
+                                        <div className=" relative rounded-[10px] bg-redDark" style={{width:skill.percentage}}>
+                                        </div>
+                                    </div>
+                                </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="mt-[35px]">
+                            <h2 className="font-bold uppercase text-[20px]">Contact me</h2>
+                            <form action="#" className='w-full'>
+                            <div className="flex flex-wrap w-full">
+                                <div className="flex-shrink-0 flex-grow-0 lg:w-[50%] w-full lg:pr-[15px] mt-0">
+                                    <div className="mt-[20px]">
+                                        <input name='name' required typeof='text' placeholder='Enter your name' className='w-full h-[60px] border outline-0 bg-transparent px-[25px] py-0 text-darkBlue'/>
+                                    </div>
+                                </div>
+                                <div className="flex-shrink-0 flex-grow-0 lg:w-[50%] w-full lg:pl-[15px] mt-0">
+                                    <div className="mt-[20px]">
+                                        <input name='name'  type='email' placeholder='Enter your email' className='w-full h-[60px] border outline-0 bg-transparent px-[25px] py-0 text-dakrBlue'/>
+                                    </div>
+                                </div>
+                                <div className="flex-shrink-0 flex-grow-0 lg:w-[50%] w-full lg:pr-[15px] mt-0">
+                                    <div className="mt-[20px]">
+                                        <input name='name' required typeof='text' placeholder='Phone' className='w-full h-[60px] border outline-0 bg-transparent px-[25px] py-0 text-dakrBlue'/>
+                                    </div>
+                                </div>
+                                <div className="flex-shrink-0 flex-grow-0 lg:w-[50%] w-full lg:pl-[15px] mt-0">
+                                    <div className="mt-[20px]">
+                                        <input name='name'  typeof='text' required placeholder='Subject' className='w-full h-[60px] border outline-0 bg-transparent px-[25px] py-0 text-dakrBlue'/>
+                                    </div>
+                                </div>
+                                <div className="flex-shrink-0 flex-grow-0 w-full mt-0">
+                                    <div className="mt-[20px]">
+                                        <textarea name='name'  typeof='text' placeholder='Your messege' required  className='w-full h-[160px] border outline-0 bg-transparent py-[23px] px-[25px] text-dakrBlue'/>
+                                    </div>
+                                </div>
+                                <button className={`relative inline-block align-middle appearance-none outline-none bg-orangeDefault text-white text-[14px] font-[800] uppercase tracking-[0]  py-[15px] px-[49px] overflow-hidden transition-all ease-linear duration-500 group z-[1] hover:text-white mt-[41px]`}>
+                                    <div className={`absolute w-[200%] h-[200%] content-[] -top-[230%] left-[50%] transform -translate-x-[50%]  -z-[1] transition-all duration-1000 bg-primaryDark  group-hover:-top-[40%]`}/>
+
+                                    send messege
+                                </button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ))}
+        </Layout>
+    </section>
+  )
+}
+
+export default TeamDetails

@@ -1,0 +1,91 @@
+"use client"
+import React, { useEffect, useState } from 'react'
+import Layout from '../Home/Layout'
+import Link from 'next/link'
+import AnimatedButton from '@/constants/AnimatedButton'
+import { AnimatedText } from '@/constants/AnimatedText'
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+// import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import { SliderData } from '@/typings'
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
+import Image from 'next/image'
+import { BsArrowLeft, BsClock } from 'react-icons/bs'
+import { BiSolidLocationPlus } from 'react-icons/bi'
+
+const Events = () => {
+    const data:SliderData[] = [
+        {
+          img: "/images/events/image-1.jpg",
+          title: "Cultural Events coming soon",
+          description: "Cultural Events coming soon",
+          button: "Discover more",
+          time: "9.00am",
+          location: "Malindi, Kenya"
+        },
+        {
+          img: "/images/events/image-3.jpg",
+          title: "Thanks giving events coming soon",
+          description: "Thanks ",
+          button: "Discover more",
+          time: "9.00am",
+          location: "Nairobi, Kenya"
+        },
+        {
+          img: "/images/events/image-1.jpg",
+          title: "Cultural Events coming soon",
+          description: "Cultural Events coming soon",
+          button: "Discover more",
+          time: "9.00am",
+          location: "Malindi, Kenya"
+        },
+        {
+          img: "/images/events/image-3.jpg",
+          title: "Thanks giving events coming soon",
+          description: "Thanks ",
+          button: "Discover more",
+          time: "9.00am",
+          location: "Nairobi, Kenya"
+        },
+    ]
+    const duplicatedData = [...data, ...data, ...data];
+
+  return (
+    <section className="py-[120px] relative block bg-white z-[1] h-full">
+        <Layout className="h-full">
+            <div className="flex flex-wrap flex-col  w-full">
+                <div className="flex-grow-0  flex-shrink-0 m-auto w-full mb-11">
+                    <div className='relative z-[3] block w-full text-center'>
+                        <div className="relative mb-[28px] block -mt-[4px] w-full text-center">
+                        <span className="text-[24px] w-full text-orangeDefault font-normal leading-[24px] mb-[10px] font-cav">Upcoming events</span>
+                        <h2 className="m-0 text-redDark text-[50px] leading-[50px] font-[500] -tracking-[0.04em] mt-[6px]">
+                        Latest upcoming events
+                        </h2>
+                        </div>
+                        <p className="text-[16px] mr-[33px] text-primaryText">There are many variations of passages of lorem ipsum available but the majority have suffered</p>
+                    </div>
+                </div>
+                <div className="flex-shrink-0 flex-grow-0 w-full">
+                                <div className='h-full w-full flex flex-wrap'>
+                                    {duplicatedData?.map((item, index) => (
+                                        <div key={index}  className='flex-shrink-0 flex-grow-0 h-full w-full lg:max-w-[33.3333%] md:max-w-[50%] sm:max-w-[50%]  relative'>
+                                            <div className='single w-full h-full mr-[20px] relative block shadow-custom '>
+                                                <div className="relative block overflow-hidden  z-[1] h-full">
+                                                <Image src={item.img} alt='image-data' width={400} height={400}  className='object-cover   h-[450px] w-full rounded-lg'/>
+                                                <div className='absolute top-0 bottom-0 left-0 right-0 content-[] bg-primaryDark bg-custom-gradient z-[1]'/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                </div>
+            </div>
+        </Layout>
+    </section>
+  )
+}
+
+export default Events

@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a,
+a:hover,
+a:focus,
+a:visited {
+  text-decoration: none;
+}
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+button:focus,
+button:hover,
+button:visited {
+  border: none;
+
+  cursor: pointer;
+}
+
+:focus {
+  outline: none;
+}
+
+
+@layer utilities {
+    .bg-custom-gradient {
+      background: linear-gradient(180deg, rgba(33, 45, 43, 0.008841036414565795) 17%, rgba(33, 45, 43, 1) 97%);
+    }
+}
+  

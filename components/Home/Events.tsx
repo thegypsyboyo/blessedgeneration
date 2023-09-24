@@ -10,151 +10,86 @@ import 'swiper/css';
 // import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
-import { SliderData } from '@/typings'
+import { EventsProps, SliderData } from '@/typings'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
 import Image from 'next/image'
 import { BsArrowLeft, BsClock } from 'react-icons/bs'
 import { BiSolidLocationPlus } from 'react-icons/bi'
+import urlFor from '@/lib/urlFor'
 
-const Events = () => {
-    const [slidesPerView, setSlidesPerView] = useState(1);
 
-    useEffect(() => {
-      const updateSlidesPerView = () => {
-        const breakpoints = {
-          lg: 1200,
-          md: 768,
-          // Add more breakpoints as needed
-        };
-  
-        // Update slidesPerView based on window width
-        if (window.innerWidth >= breakpoints.lg) {
-          setSlidesPerView(2);
-        } else if (window.innerWidth >= breakpoints.md) {
-          setSlidesPerView(2);
-        } else {
-          setSlidesPerView(1);
-        }
-      };
-  
-      // Initial update
-      updateSlidesPerView();
-  
-      // Update slidesPerView whenever the window width changes
-      window.addEventListener('resize', updateSlidesPerView);
-  
-      // Clean up the event listener when the component unmounts
-      return () => {
-        window.removeEventListener('resize', updateSlidesPerView);
-      };
-    }, []);
+type Props = {
+  eventdata:EventsProps[]
+}
+const Events = ({eventdata}:Props) => {
 
-    const data:SliderData[] = [
-        {
-          img: "/images/events/image-1.jpg",
-          title: "Cultural Events coming soon",
-          description: "Cultural Events coming soon",
-          button: "Discover more",
-          time: "9.00am",
-          location: "Malindi, Kenya"
-        },
-        {
-          img: "/images/events/image-3.jpg",
-          title: "Thanks giving events coming soon",
-          description: "Thanks ",
-          button: "Discover more",
-          time: "9.00am",
-          location: "Nairobi, Kenya"
-        },
-        {
-          img: "/images/events/image-1.jpg",
-          title: "Cultural Events coming soon",
-          description: "Cultural Events coming soon",
-          button: "Discover more",
-          time: "9.00am",
-          location: "Malindi, Kenya"
-        },
-        {
-          img: "/images/events/image-3.jpg",
-          title: "Thanks giving events coming soon",
-          description: "Thanks ",
-          button: "Discover more",
-          time: "9.00am",
-          location: "Nairobi, Kenya"
-        },
-    ]
+  const selectedEvents = eventdata.filter((event, index) => {
+    // Here, you can define a condition to select the objects you want.
+    // For example, let's say you want the first two objects:
+    return index === 0 || index === 1;
+  });
+
+  console.log("SELECETED EVENTS",selectedEvents.length)
+
+  console.log("Two events: ", selectedEvents)
   return (
-    <section className="py-[120px] relative block bg-white z-[1] h-full">
+    <section className="py-[120px] pb-[240px] mt-0 relative block bg-[#fe0] z-[1] h-full w-full">
         <Layout className="h-full">
-            <div className="flex flex-wrap  w-full">
-                <div className="flex-grow-0  flex-shrink-0 m-auto w-full lg:max-w-[33.333333%] mb-8">
-                    <div className='relative z-[3] block w-full'>
+            <div className="flex flex-wrap items-center justify-center w-full h-full">
+                <div className="flex-grow-0 flex-shrink-0 w-full lg:max-w-[33.333333%] mb-8 h-full">
+                    <div className='relative z-[3] block w-full h-full'>
                         <div className="relative mb-[28px] block -mt-[4px] w-full">
-                        <span className="text-[24px] w-full text-orangeDefault font-normal leading-[24px] mb-[10px] font-man">Upcoming events</span>
-                        <h2 className="m-0 text-primaryDark text-[50px] leading-[50px] font-[900] -tracking-[0.04em] mt-[6px]">
-                            <AnimatedText text={"Latest upcoming events"} className={""} />
+                        <span className="text-[24px] w-full text-darkBlue font-normal leading-[24px] mb-[10px] font-man">Upcoming events</span>
+                        <h2 className="m-0 text-darkBlue text-[40px] leading-[55px] font-bold  mt-[6px] capitalize font-man">
+                            {/* <AnimatedText text={"Latest upcoming events"} className={""} /> */}
+                            Multiple Events & Conference 
                         </h2>
                         </div>
-                        <p className="text-[16px] mr-[33px] text-primaryText">There are many variations of passages of lorem ipsum available but the majority have suffered</p>
-                        <AnimatedButton style='' text="discover more" link="/events" className="" />
-                        {/* <Link href="" className={`relative inline-block align-middle appearance-none outline-none bg-orangeDefault text-white text-[14px] font-[800] uppercase tracking-[0] rounded-[30px] py-[15px] px-[49px] overflow-hidden transition-all ease-linear duration-500 group z-[1] hover:text-white mt-[41px] `}>
-                          <div className={`absolute w-[200%] h-[200%] content-[] -top-[230%] left-[50%] transform -translate-x-[50%] rounded-[50%] -z-[1] transition-all duration-1000 bg-primaryDark  group-hover:-top-[40%] `}/>
-                          Discover more
-                      </Link> */}
+                        <p className="text-[16px] mr-[33px] text-darkBlue ">There are many variations of passages of lorem ipsum available but the majority have suffered</p>
+                        <AnimatedButton style='!bg-darkBlue !rounded-[8px] !mt-4' text="discover more" link="/events" className="!bg-redDark" />
                     </div>
                 </div>
-                <div className="flex-shrink-0 flex-grow-0 w-full lg:max-w-[66.66666667%]">
-                        <Swiper
-                            className='h-full w-full'
-                            // effect={'fade'}
-                            autoplay={{
-                            delay: 5000,
-                            disableOnInteraction: false,
-                            }}
-                            grabCursor={true}
-                            centeredSlides={false}
-                            spaceBetween={20}
-                            loop={true}
-
-                            modules={[EffectFade ,Autoplay, Navigation]} 
-                            slidesPerView={slidesPerView}                     
-                            >
-                                <div className='h-full w-full'>
-                                    {data.map((item, index) => (
-                                        <SwiperSlide key={index}  className='container h-full w-full relative'>
-                                            <div className='single w-full h-full mr-[20px] relative block shadow-custom '>
-                                                <div className="relative block overflow-hidden  z-[1] h-full">
-                                                <Image src={item.img} alt='image-data' width={400} height={400}  className='object-cover   h-[450px] w-full rounded-lg'/>
-                                                <div className='absolute top-0 bottom-0 left-0 right-0 content-[] bg-primaryDark bg-custom-gradient z-[1]'/>
-                                                <div className="absolute top-[20px] right-[20px] bg-orangeDefault rounded-[20px] px-[25px] py-[6px] z-[2]">
-                                                    <p className="text-[18px] leading-[18px] text-[700] font-cav text-white">23 May, 2022</p>
-                                                </div>
-                                                <div className="absolute bottom-[24px] left-[30px] z-[2]">
-                                                    <ul className="relative flex items-start space-x-4">
-                                                        <li className="relative flex items-center text-[14px] text-white font-[600]">
-                                                            <BsClock className="text-yellowColor mr-[5px]"/>
-                                                            {item.time}
-                                                        </li>
-                                                        <li className="relative flex items-center text-[14px] text-white font-[600]">
-                                                            <BiSolidLocationPlus className="text-yellowColor mr-[5px]"/>
-                                                            {item.location}
-                                                        </li>
-                                                    </ul>
-                                                    <h3 className="text-[24px] font-bold -tracking-[0.04em] leading-[28px] w-full pr-4">
-                                                        <Link href={""} className='text-white transition-all duration-700 hover:text-orangeDefault' >{item.title}</Link>
-                                                    </h3>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div className="absolute -bottom-[70px] right-0 m-0 w-full h-full">
-                                                <button className='h-[50px] w-[50px]  rounded-[50%] text-primaryDark border-borderColor border-solid text-[15px] m-0 text-center transition-all duration-700 '>
-                                                    <BsArrowLeft />
-                                                </button>
-                                            </div>
-                                        </SwiperSlide>
-                                    ))}
+                <div className="flex-shrink-0 flex-grow-0 w-full lg:max-w-[66.66666667%] h-full">
+                        
+                        <div className="w-full h-full flex flex-col space-y-[20px]">
+                          {selectedEvents.map((item, index) => (
+                          <div className="bg-redhref={`/events/event-details/${item.slug.current}`}Light w-full  h-full" key={index}>
+                            <div className="bg-white overflow-hidden border border-[#e8e7e7] flex items-center transition-all duration-300 md:h-[200px] lg:h-[150px] h-full w-full group flex-wrap ">
+                              <div className="w-full h-full lg:h-[150px] md:w-[150px] flex-grow-0 flex-shrink-0 bg-yellowColor md:full ">
+                                <div className='relative  bg-[#e7e6e4] w-full h-full'>
+                                  <Image src={urlFor(item.image).url()} 
+                                  alt='gallery' 
+                                  width={800} height={800}
+                                  className=' w-full h-[230px] lg:h-[150px] md:h-[200px] object-cover transform scale-[1.01] transition-all duration-150'/>
+                                  <Link className="absolute top-[50%] left-[50%] inline-block text-[13px] font-bold leading-[20px] uppercase text-darkBlue bg-[#fe0] py-[6px] px-[15px] opacity-0 mt-[20px] transition-all duration-500 transform translate-x-[-50%] translate-y-[50%]   group-hover:opacity-[1] group-hover:translate-y-[-60%]" href={`/events/event-details/${item.slug.current}`} >view</Link>
                                 </div>
-                        </Swiper>
+                              </div>
+                              <div className="w-full md:w-[calc(100%-150px)] h-full flex items-center flex-grow-0 flex-shrink-0 ">
+                                <div className="w-full h-full flex flex-wrap">
+                                  <div className="flex-grow-0 flex-shrink-0 w-full lg:w-[60%] py-[20px] px-[40px]">
+                                    <h3 className="text-[22px] font-semibold leading-[30px] mb-[12px] text-darkBlue w-full">
+                                      <Link href={`/events/event-details/${item.slug.current}`} className='w-full h-full'>
+                                       {item.title}
+                                    </Link></h3>
+                                    <div className="text-[14px] font-normal leading-[25px] uppercase text-[#4d6995] w-full">
+                                    <span className="">{item.startDate}</span>
+                                    <span className=""> {item.endDate}</span>
+                                    </div>
+                                  </div>
+                                  <div className="relative lg:w-[40%] flex-grow-0 flex-shrink-0 py-[20px] px-[40px] w-full h-full my-auto">
+                                    <div className="content-[] absolute top-[50%] left-0 w-[1px] h-[50px] bg-[#7889a4] mt-[-25px] lg:block hidden "/>
+                                    <h3 className="text-[16px] font-semibold leading-[25px]text-darkBlue mb-[8px] w-full">Events Location:</h3>
+                                    <span className="text-[14px] font-normal leading-[24px] text-darkBlue">
+                                        <span className="">{item.address}</span><span className="">,</span>
+                                  </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          ))}
+                         
+                        </div>
                 </div>
             </div>
         </Layout>

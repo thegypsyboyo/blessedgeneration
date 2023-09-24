@@ -1,0 +1,54 @@
+import React from 'react'
+import Layout from './Layout'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FaGithub } from 'react-icons/fa';
+
+interface ImageInfo {
+    image: string;
+    title: string,
+    slug: string,
+}
+
+interface SingleImageGalleryProps {
+    images: ImageInfo[];
+}
+const Project:React.FC<ImageInfo> = ({title, slug, image}) => {
+    return (
+        <article className='border border-solid border-dark bg-light p-6 rounded-2xl flex flex-col items-center justify-center'>
+            <Link href={slug} target='_blank' className='w-full cursor-pointer overflow-hidden rounded-lg'>
+                <Image src={image} alt={title} width={400} height={500} className='w-full h-[400px] object-cover'/>
+            </Link>
+
+            <div className='flex flex-col w-full items-start justify-between mt-4'>
+             
+                <Link href={""} target={'_blank'} className='hover:underline underline-offset-2'>
+                    <h2 className='my-2 w-full text-left text-2xl font-bold '>{title}</h2>
+                </Link>
+               <div className='w-full flex mt-2 items-center justify-between'>
+                    <Link href={""} target='_blank' className='text-lg font-semibold  underline underline-offset-2'>Visit Project</Link>
+                    <Link href={slug} target='_blank' className='w-10'> <FaGithub/></Link>
+               </div>
+            </div>
+        </article>
+    )
+}
+
+const Features:React.FC= ({}) => {
+  return (
+    <section className='relative block pt-[270px] mt-[0] pb-[90px] px-0 w-full' >
+        <Layout>
+            <div className="grid grid-flow-col-12 w-full h-full">
+                <div className="col-span-12 ">
+                    <Project image='/images/test/gallery-1.jpg' slug='' 
+                    title={"Crypto Screener Application"}                     
+                    />
+                </div>
+            </div>
+        </Layout>
+
+    </section>
+  )
+}
+
+export default Features
