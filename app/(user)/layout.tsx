@@ -22,19 +22,19 @@ config.autoAddCss = false;
 const nunito = Nunito({ 
   subsets: ['latin'],
   variable: '--font-nun',
-  // display: 'swap',
-  // adjustFontFallback: false
+  display: 'swap',
+  adjustFontFallback: false
 })
 const manrope = Manrope({ 
   subsets: ['latin'],
   variable: '--font-man',
-  // display: 'swap',
-  // adjustFontFallback: false
+  display: 'swap',
+  adjustFontFallback: false
 })
 const caveat = Caveat({ 
   subsets: ['cyrillic'], 
-  // display: 'swap', 
-  // adjustFontFallback: false,
+  display: 'swap', 
+  adjustFontFallback: false,
   variable: "--font-cav"
 })
 
